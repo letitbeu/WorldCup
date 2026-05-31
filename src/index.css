@@ -2,8 +2,127 @@
 @tailwind components;
 @tailwind utilities;
 
-:root { color-scheme: dark; }
-* { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; background: #020617; }
-button, input, select { font: inherit; }
-::selection { background: rgba(251, 191, 36, 0.35); }
+:root {
+  color-scheme: dark;
+  --wc-bg: #020916;
+  --wc-panel: rgba(7, 19, 34, 0.92);
+  --wc-line: rgba(34, 211, 238, 0.16);
+  --wc-line-strong: rgba(34, 211, 238, 0.32);
+  --wc-text: #f8fafc;
+  --wc-muted: #748198;
+  --wc-gold: #f7b733;
+  --wc-cyan: #22d3ee;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 1440px;
+  overflow-x: auto;
+  background:
+    radial-gradient(circle at 52% 0%, rgba(34, 211, 238, 0.12), transparent 34%),
+    radial-gradient(circle at 90% 18%, rgba(245, 158, 11, 0.08), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 18%),
+    var(--wc-bg);
+  font-feature-settings: "tnum" on, "lnum" on;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.32);
+}
+
+/* Emergency UI hardening: prevent every table/card from leaking text outside its cell. */
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+img,
+svg {
+  flex-shrink: 0;
+}
+
+/* Premium terminal polish applied over Tailwind utility markup. */
+.rounded-md,
+.rounded-lg,
+.rounded-\[10px\] {
+  backdrop-filter: blur(18px);
+}
+
+.border-cyan-400\/20,
+.border-cyan-300\/14,
+.border-cyan-400\/14,
+.border-cyan-400\/10 {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+.bg-\[\#071322\] {
+  background:
+    linear-gradient(180deg, rgba(15, 31, 55, 0.98), rgba(4, 13, 27, 0.98)) !important;
+}
+
+.bg-\[\#06111f\] {
+  background:
+    linear-gradient(180deg, rgba(10, 27, 48, 0.96), rgba(4, 13, 27, 0.96)) !important;
+}
+
+.text-white,
+.text-slate-200,
+.text-slate-300 {
+  text-rendering: geometricPrecision;
+}
+
+/* Make dense dashboard rows feel closer to the reference image. */
+thead tr {
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.055), rgba(34, 211, 238, 0.018));
+}
+
+tbody tr {
+  transition: background 140ms ease, box-shadow 140ms ease;
+}
+
+tbody tr:hover {
+  background: rgba(34, 211, 238, 0.045);
+  box-shadow: inset 3px 0 0 rgba(34, 211, 238, 0.65);
+}
+
+/* No uncontrolled text overflow anywhere inside the app. */
+#root * {
+  min-width: 0;
+}
+
+#root .truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
